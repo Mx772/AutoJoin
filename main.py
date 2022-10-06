@@ -10,27 +10,36 @@ from pynput.keyboard import Key, Controller
 import pygetwindow as gw
 from PIL import ImageGrab 
 
-# Do whatever array of words you want to process here. Using 'left the game' works, but then you may get false-positives when there isn't room in the server. 
-giveaways = ['left the game']
+# Config Section:
+# Insert whatever array of words you want to process here. Using 'left the game' works, but then you may get false-positives when there isn't room in the server. 
+triggerList = ['left the game']
+# Path of tesseract executable 
+pyPath = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+soundEnabled = False
+soundPath = 'G:\\Downloads\\1_second_tone.mp3'
+boundingBox = (2840, 1727, 3780, 1850)
 
 def autoJoin(): 
 	time.sleep(2)
 	print('Waiting to Join Game')
-	# Path of tesseract executable 
-	# Example: `C:\Users\myPC\Documents\Tesseract-OCR\tesseract.exe`
-	pytesseract.pytesseract.tesseract_cmd =r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+	pytesseract.pytesseract.tesseract_cmd = pyPath
 	while(True): 
-		cap = ImageGrab.grab(all_screens=True, bbox =(2840, 1727, 3780, 1850))
+		cap = ImageGrab.grab(all_screens=True, bbox = boundingBox)
 		tesstr = pytesseract.image_to_string(cap, lang ='eng')
 		keyboard = Controller()
-		if any(word in tesstr for word in giveaways):
+		if any(word in tesstr for word in triggerList):
 			print("Found!")
-			mcWin = gw.getWindowsWithTitle('Minecraft')[0]
-			mcWin.activate()
-			keyboard.press(Key.enter)
-			keyboard.release(Key.enter)
-			# Uncomment to play sound
-			# playsound('G:\\Downloads\\1_second_tone.mp3')
+			try:
+				mcWin = gw.getWindowsWithTitle('Minecraft')[0]
+				mcWin.activate()
+				keyboard.press(Key.enter)
+				keyboard.release(Key.enter)
+				if soundEnabled:	
+					# Uncomment to play sound
+					print("Playing Sound")
+					# playsound(soundPath)
+			except:
+				print('Could not find any windows named Minecraft')
 			quit()
 
 autoJoin() 
