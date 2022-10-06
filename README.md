@@ -32,6 +32,9 @@ I personally use ShareX which displays the coordinates on the screen when using 
 
 You can then put those into the bounding Box.
 
+![image](https://user-images.githubusercontent.com/9059161/194331708-2c571644-f2ad-4855-a1f7-c7ba22a84ccb.png)
+
+
 ### Enabling Sound
 I enable the sound toggle if I am going to do other things while waiting. This will play whatever sound you define when you are joining the game. 
 
