@@ -10,7 +10,10 @@ from pynput.keyboard import Key, Controller
 import pygetwindow as gw
 from PIL import ImageGrab 
 
+############################################
 # Config Section:
+############################################
+
 # Insert whatever array of words you want to process here. Using 'left the game' works, but then you may get false-positives when there isn't room in the server. 
 triggerList = ['left the game']
 # Path of tesseract executable 
@@ -18,6 +21,10 @@ pyPath = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 soundEnabled = False
 soundPath = 'G:\\Downloads\\1_second_tone.mp3'
 boundingBox = (2840, 1727, 3780, 1850)
+debug = False
+
+############################################
+############################################
 
 def autoJoin(): 
 	time.sleep(2)
@@ -26,6 +33,10 @@ def autoJoin():
 	while(True): 
 		cap = ImageGrab.grab(all_screens=True, bbox = boundingBox)
 		tesstr = pytesseract.image_to_string(cap, lang ='eng')
+		if debug:
+			print("Words found in Image:")
+			print(tesstr)
+			cap.show()
 		keyboard = Controller()
 		if any(word in tesstr for word in triggerList):
 			print("Found!")
