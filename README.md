@@ -8,7 +8,7 @@ The expectation here is that you set the bbox (Bounding Box) coords to a status 
 ```
 pip install time pynput pygetwindow pillow
 ```
-optional:
+optional (If you want sound on join):
 
 ```
 pip install playsound
@@ -34,8 +34,10 @@ You can then put those into the bounding Box.
 
 ![image](https://user-images.githubusercontent.com/9059161/194331708-2c571644-f2ad-4855-a1f7-c7ba22a84ccb.png)
 
-
 ### Enabling Sound
 I enable the sound toggle if I am going to do other things while waiting. This will play whatever sound you define when you are joining the game. 
 
 Note: If you don't want sound, or don't want to grab the sound package, just comment out any lines with `playsound`.
+
+### Debug
+Enabling Debug mode via the config settings will open the image captured and display the text from the screen cap. (Useful for tweaking coordinates)
